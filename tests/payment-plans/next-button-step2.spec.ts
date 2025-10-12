@@ -7,19 +7,22 @@ test.describe("Next button on selecting payment page", () => {
 
     test.beforeEach(async ({ page }) => {
         paymentPlanPage = new PaymentPlanPage(page);
-        await CommonUI.completeStartApplicationForm(page, "Muhtar", "M", "muhtar.mahmoud@example.com", "1234567890");
+        await CommonUI.completeStartApplicationForm(
+            page,
+            "Jyoti",
+            "S",
+            "jsahoo@example.com",
+            "1234567890"
+        );
     });
 
-    test('Verify that the next button is displayed', async ({page}) => {
+    test("Verify that the next button is displayed", async ({ page }) => {
         await expect(paymentPlanPage.inactiveNextButton).toBeVisible();
     });
 
-    test('Verify that the next button is disabled by default', async ({page}) => {
+    test("Verify that the next button is disabled by default", async ({
+        page,
+    }) => {
         await expect(paymentPlanPage.inactiveNextButton).toBeDisabled();
     });
-
-    //TODO Complete the other remaining tests of this user story ...
-   
-
-
 });

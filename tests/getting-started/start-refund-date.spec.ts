@@ -2,7 +2,6 @@ import { test, expect } from "../../utilities/sep-test-utilities";
 import { StartApplicationPage } from "../../pages/StartApplicationPage";
 import { productInfo } from "../../utilities/qa-data-reader";
 
-// create an empty test group.
 test.describe("Program start date and refund date", () => {
     let startAppPage: StartApplicationPage;
 
@@ -25,9 +24,6 @@ test.describe("Program start date and refund date", () => {
         const ACTUAL_START_DATE =
             await startAppPage.programStartDate.innerText();
         const EXPECTED_START_DATE = productInfo.startDate;
-
-        //console.log(`Expected Upfront price ${productInfo.prices[0].baseAmount}`);
-        //console.log(`Expected Upfront discount amount ${productInfo.prices[0].upfrontDiscountAmount}`);
 
         const ACTUAL_REFUND_DATE = await startAppPage.refundEndDate.innerText();
         const EXPECTED_REFUND_DATE = productInfo.refundDate;
