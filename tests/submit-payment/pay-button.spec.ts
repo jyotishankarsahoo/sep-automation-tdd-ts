@@ -3,7 +3,6 @@ import { CommonUI } from "../../utilities/sep-test-utilities";
 import { ReviewPaymentPage } from "../../pages/ReviewPaymentPage";
 
 test.describe("Pay button on review payment page", () => {
-
     let reviewPaymentPage: ReviewPaymentPage;
 
     test.beforeEach(async ({ page }) => {
@@ -12,16 +11,13 @@ test.describe("Pay button on review payment page", () => {
         await CommonUI.completeSelectingPaymentPlan(page, "upfront");
     });
 
-    test('Verify that the pay button is displayed', async ({page}) => {
-      await expect(reviewPaymentPage.payButton).toBeVisible();
+    test("Verify that the pay button is displayed", async ({ page }) => {
+        await expect(reviewPaymentPage.payButton).toBeVisible();
     });
 
-    test('Verify that the pay button is disabled by default', async ({page}) => {
+    test("Verify that the pay button is disabled by default", async ({
+        page,
+    }) => {
         await expect(reviewPaymentPage.payButton).toBeDisabled();
     });
-
-    //TODO Complete the other remaining tests of this user story ...
-   
-
-
 });
