@@ -11,13 +11,24 @@ test.describe("Pay button on review payment page", () => {
         await CommonUI.completeSelectingPaymentPlan(page, "upfront");
     });
 
-    test("Verify that the pay button is displayed", async ({ page }) => {
-        await expect(reviewPaymentPage.payButton).toBeVisible();
-    });
-
-    test("Verify that the pay button is disabled by default", async ({
+    test("Verify that the pay button is displayed and disabled by default", async ({
         page,
     }) => {
+        await expect(reviewPaymentPage.payButton).toBeVisible();
         await expect(reviewPaymentPage.payButton).toBeDisabled();
+    });
+
+    test("Verify that the T&C checkbox is unchecked by default", async ({
+        page,
+    }) => {
+        await expect(
+            reviewPaymentPage.termsAndConditionsCheckBox
+        ).not.toBeChecked();
+    });
+    test("Verify pay button enables on clicking t&c Check Box", async ({
+        page,
+    }) => {
+        await reviewPaymentPage.clickTermsAndConditionsCheckbox();
+        await expect(reviewPaymentPage.payButton).toBeEnabled();
     });
 });
