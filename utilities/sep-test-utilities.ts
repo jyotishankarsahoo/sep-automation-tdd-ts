@@ -63,8 +63,8 @@ export class CommonUI {
     static async completeEnteringCardInformation(
         page: Page,
         cardNumber: string = process.env.CARD_NUMBER ?? "",
-        expirationDate: string = process.env.CARD_EXPIRATION_DATE ?? "",
-        cvc: string = process.env.CARD_SECURITY_CODE ?? "",
+        expirationDate: string = process.env.CARD_EXPIRATION_DATE ?? "12/28",
+        cvc: string = process.env.CARD_SECURITY_CODE ?? "123",
         zipCode: string = process.env.ZIP_CODE ?? ""
     ) {
         this.reviewPaymentPage = new ReviewPaymentPage(page);
@@ -72,6 +72,29 @@ export class CommonUI {
         await this.reviewPaymentPage.enterExpiryDate(expirationDate);
         await this.reviewPaymentPage.enterCVC(cvc);
         await this.reviewPaymentPage.enterZipCode(zipCode);
+    }
+
+    static async completePayment(
+        page: Page,
+        jsonBody: JSON
+    ) {
+        this.reviewPaymentPage = new ReviewPaymentPage(page);
+        await this.reviewPaymentPage.clickTermsAndConditionsCheckbox();
+        const TARGET_URL = "**/v1/payment_intents/*/confirm";
+        await page.route(TARGET_URL, async (route) => {
+            let request = route.request();
+            console.log(`URL: ${request.url()}`);
+            console.log(`METHOD: ${request.method()}`);
+            await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                json: jsonBody,
+            });
+            console.log(`✅ Request to ${route.request().url()} was mocked.`);
+        });
+        await this.reviewPaymentPage.clickPayButton();
+        const MOCKED_RESPONSE = await page.waitForResponse(TARGET_URL);
+        console.log(`Response: ${await MOCKED_RESPONSE.body()}`);
     }
 }
 

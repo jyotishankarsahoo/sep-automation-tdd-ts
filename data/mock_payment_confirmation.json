@@ -1,0 +1,37 @@
+{
+    "id": "pi_3SEygiJmxFuDfdzn1TPFf3or",
+    "object": "payment_intent",
+    "amount": 41200,
+    "amount_details": {
+        "tip": {}
+    },
+    "automatic_payment_methods": {
+        "allow_redirects": "always",
+        "enabled": true
+    },
+    "canceled_at": null,
+    "cancellation_reason": null,
+    "capture_method": "automatic",
+    "client_secret":
+        "pi_3SEygiJmxFuDfdzn1TPFf3or_secret_fr3JYr5IO6a2wUYdLDJxx6IsA",
+    "confirmation_method": "automatic",
+    "created": 1759696668,
+    "currency": "usd",
+    "description": "Test Automation with Selenium - one_time",
+    "excluded_payment_method_types": null,
+    "last_payment_error": null,
+    "livemode": false,
+    "next_action": null,
+    "payment_method": "pm_1SEygiJmxFuDfdznuiMWbzZr",
+    "payment_method_configuration_details": {
+        "id": "pmc_1Olb9IJmxFuDfdznXRTQVXKM",
+        "parent": null
+    },
+    "payment_method_types": ["card", "customer_balance"],
+    "processing": null,
+    "receipt_email": null,
+    "setup_future_usage": null,
+    "shipping": null,
+    "source": null,
+    "status": "succeeded"
+}
