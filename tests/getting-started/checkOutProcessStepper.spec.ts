@@ -1,42 +1,43 @@
-import { PaymentPlanPage } from "../../pages/PaymentPlanPage";
-import { ReviewPaymentPage } from "../../pages/ReviewPaymentPage";
 import { StartApplicationPage } from "../../pages/StartApplicationPage";
 import { test, expect } from "../../utilities/sep-test-utilities";
 
-test.describe("Verify Check Process Stepper", () => {
+test.describe("Checkout Process Stepper Circle Validation", () => {
     let startApplicationPage: StartApplicationPage;
-
     test.beforeEach(async ({ page }) => {
         startApplicationPage = new StartApplicationPage(page);
     });
-
-    test("Verify Step Titles for all the steps", async ({ page }) => {
+    test("Verify Step title for checkout process", async ({ page }) => {
+        const expectedStepTitles = {
+            stepOne: "Start Application",
+            stepTwo: "Payment plan",
+            stepThree: "Review",
+        };
         await expect(startApplicationPage.startApplicationText).toHaveText(
-            "Start Application"
+            expectedStepTitles.stepOne
         );
         await expect(startApplicationPage.paymentPlanText).toHaveText(
-            "Payment plan"
+            expectedStepTitles.stepTwo
         );
-        await expect(startApplicationPage.reviewText).toHaveText("Review");
+        await expect(startApplicationPage.reviewText).toHaveText(
+            expectedStepTitles.stepThree
+        );
     });
-    test("Verify 'Start Application' stepper circle is in blue.", async ({
-        page,
-    }) => {
+    test("Verify Stepper circle for checkout process", async ({ page }) => {
+        const expectedColors = {
+            activeBlue: "rgb(1, 201, 255)",
+            inactiveGrey: "rgba(0, 0, 0, 0)",
+        };
         await expect(startApplicationPage.startApplicationStepCircle).toHaveCSS(
             "background-color",
-            "rgb(1, 201, 255)"
+            expectedColors.activeBlue
         );
-    });
-    test("Verify 'Payment Plan' & 'Review' stepper circle is in grey.", async ({
-        page,
-    }) => {
         await expect(startApplicationPage.paymentPlanStepCircle).toHaveCSS(
             "background-color",
-            "rgba(0, 0, 0, 0)"
+            expectedColors.inactiveGrey
         );
         await expect(startApplicationPage.reviewStepCircle).toHaveCSS(
             "background-color",
-            "rgba(0, 0, 0, 0)"
+            expectedColors.inactiveGrey
         );
     });
 });
