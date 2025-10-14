@@ -130,3 +130,9 @@ class Product {
 export const productInfo = new Product(
     JSON.parse(readFileSync("./data/qa_data.json", "utf8"))
 );
+/**
+ * Export Mocked Payment Confirmation response body from JSON data in a file
+ */
+export const mockedResponseBody = JSON.parse(
+    readFileSync("./data/mock_payment_confirmation.json", "utf8")
+);

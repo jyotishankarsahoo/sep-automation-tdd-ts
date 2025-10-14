@@ -2,16 +2,10 @@ import { StartApplicationPage } from "../../pages/StartApplicationPage";
 import { productInfo } from "../../utilities/qa-data-reader";
 import { test, expect, CommonUI } from "../../utilities/sep-test-utilities";
 import { readFileSync } from "fs";
-import * as path from "path";
 
 test.describe("Payment flow completion", () => {
     let startApplicationPage: StartApplicationPage;
-    const mockedResponseBody = JSON.parse(
-        readFileSync(
-            path.join(__dirname, "../../data/mock_payment_confirmation.json"),
-            "utf8"
-        )
-    );
+
     test.beforeEach(async ({ page }) => {
         startApplicationPage = new StartApplicationPage(page);
         await CommonUI.completeStartApplicationForm(page);
@@ -21,14 +15,14 @@ test.describe("Payment flow completion", () => {
     test("Verify user navigates to confirmation screen on clicking on pay button", async ({
         page,
     }) => {
-        await CommonUI.completePayment(page, mockedResponseBody);
+        await CommonUI.completePayment(page);
         const actualProgramName = productInfo.programName;
         await expect(
             page.locator("span").filter({ hasText: actualProgramName })
         ).toBeVisible();
     });
     test("Verify stepper circle state post payment", async ({ page }) => {
-        await CommonUI.completePayment(page, mockedResponseBody);
+        await CommonUI.completePayment(page);
         expect(startApplicationPage.startApplicationStepCircle).toHaveCSS(
             "background-color",
             "rgb(172, 245, 138)"
@@ -45,7 +39,7 @@ test.describe("Payment flow completion", () => {
     test("Verify program name, user email and company contact ", async ({
         page,
     }) => {
-        await CommonUI.completePayment(page, mockedResponseBody);
+        await CommonUI.completePayment(page);
         const actualProgramName = productInfo.programName;
         const actualEmail = await page
             .locator("div.payment-confirmation")

@@ -5,7 +5,7 @@ import fs from "fs";
 import { StartApplicationPage } from "../pages/StartApplicationPage";
 import { PaymentPlanPage } from "../pages/PaymentPlanPage";
 import { ReviewPaymentPage } from "../pages/ReviewPaymentPage";
-
+import { mockedResponseBody } from "../utilities/qa-data-reader";
 //Extends the base test with custom UI setup for SEP application.
 export const test = base.extend({
     page: async ({ page }, use: Function, testInfo: TestInfo) => {
@@ -74,10 +74,7 @@ export class CommonUI {
         await this.reviewPaymentPage.enterZipCode(zipCode);
     }
 
-    static async completePayment(
-        page: Page,
-        jsonBody: JSON
-    ) {
+    static async completePayment(page: Page) {
         this.reviewPaymentPage = new ReviewPaymentPage(page);
         await this.reviewPaymentPage.clickTermsAndConditionsCheckbox();
         const TARGET_URL = "**/v1/payment_intents/*/confirm";
@@ -88,9 +85,9 @@ export class CommonUI {
             await route.fulfill({
                 status: 200,
                 contentType: "application/json",
-                json: jsonBody,
+                json: mockedResponseBody,
             });
-            console.log(`✅ Request to ${route.request().url()} was mocked.`);
+            console.log(`✅ Request to ${route.request().url()} is mocked.`);
         });
         await this.reviewPaymentPage.clickPayButton();
         const MOCKED_RESPONSE = await page.waitForResponse(TARGET_URL);
