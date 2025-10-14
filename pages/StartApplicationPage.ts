@@ -41,6 +41,11 @@ export class StartApplicationPage extends BasePage {
     public readonly phoneNumberInputBox: Locator = this.locator(
         "//input[@formcontrolname='phoneNumber']"
     );
+    public readonly phoneNumberLabel: Locator = this.locator(
+        'label.mat-mdc-floating-label:has-text("Phone")'
+    );
+    public readonly phoneNumberRequiredMarker: Locator =
+        this.phoneNumberLabel.locator(".mat-mdc-form-field-required-marker");
 
     public readonly howDidYouHearAboutUsDropDown: Locator = this.locator(
         "//mat-label[text()='How did you hear about us?']"
