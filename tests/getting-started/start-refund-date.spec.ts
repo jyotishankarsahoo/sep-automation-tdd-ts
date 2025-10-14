@@ -31,6 +31,4 @@ test.describe("Program start date and refund date", () => {
         expect(ACTUAL_START_DATE).toBe(EXPECTED_START_DATE);
         expect(ACTUAL_REFUND_DATE).toBe(EXPECTED_REFUND_DATE);
     });
-
-    //TODO Complete the other remaining tests of this user story ...
 });
