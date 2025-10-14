@@ -106,7 +106,8 @@ export class StartApplicationPage extends BasePage {
     public readonly programStartDate: Locator = this.locator(
         "//div[contains(text(), 'Program Start Date')]/b[@class='info-value']"
     );
-
+    public readonly refundPolicyText: Locator =
+        this.locator("span.info-primary");
     public readonly refundEndDate: Locator = this.locator(
         "(//b[@class='info-value'])[2]"
     );
