@@ -136,3 +136,15 @@ export const productInfo = new Product(
 export const mockedResponseBody = JSON.parse(
     readFileSync("./data/mock_payment_confirmation.json", "utf8")
 );
+
+/**
+ * Export Payment Error
+ */
+export const PaymentError = {
+    CARD: {
+        INVALID_NUMBER: "Your card number is invalid.",
+        INCOMPLETE_NUMBER: "Your card number is incomplete.",
+        INCOMPLETE_CVC: "Your card’s security code is incomplete.",
+        PAST_EXPIRY_YEAR: "Your card’s expiration year is in the past.",
+    },
+};

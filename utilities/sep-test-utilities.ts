@@ -52,7 +52,7 @@ export class CommonUI {
     // Selects a payment with provided or default payment plan after completing the start application form.
     static async completeSelectingPaymentPlan(
         page: Page,
-        paymentPlanType: string = "upfront"
+        paymentPlanType: "upfront" | "installments" = "upfront"
     ) {
         this.paymentPlanPage = new PaymentPlanPage(page);
         await this.paymentPlanPage.selectPaymentPlan(paymentPlanType);
