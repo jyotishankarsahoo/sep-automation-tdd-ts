@@ -88,7 +88,7 @@ export class PaymentPlanPage extends BasePage {
     );
 
     public readonly perMonthTextInstallments: Locator = this.locator(
-        "//span[@class='discount-price ng-star-inserted']/span"
+        "//span[@class='discount-price ng-star-inserted']"
     );
 
     public readonly couponAvailableBadgeInstallments: Locator = this.locator(
@@ -178,15 +178,12 @@ export class PaymentPlanPage extends BasePage {
         "//span[@class='payment-type']"
     );
 
-    public async selectPaymentPlan(
-        paymentPlan: string | "upfront" | "installments"
-    ) {
-        paymentPlan = paymentPlan.toLowerCase();
-        switch (true) {
-            case paymentPlan.includes("upfront"):
+    public async selectPaymentPlan(paymentPlan: "upfront" | "installments") {
+        switch (paymentPlan) {
+            case "upfront":
                 await this.upfrontPaymentOption.click();
                 break;
-            case paymentPlan.includes("installments"):
+            case "installments":
                 await this.installmentsPaymentOption.click();
                 break;
             default:
